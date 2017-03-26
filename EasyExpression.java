@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * @author hezhuofan
  * @
  */
-public class VerbalExpression {
+public class EasyExpression {
 
     private final Pattern pattern;
 
@@ -64,10 +64,10 @@ public class VerbalExpression {
             return (where.length() - where.replace(what, "").length()) / what.length();
         }
 
-        public VerbalExpression build() {
+        public EasyExpression build() {
             Pattern pattern = Pattern.compile(new StringBuilder(prefixes)
                     .append(source).append(suffixes).toString(), modifiers);
-            return new VerbalExpression(pattern);
+            return new EasyExpression(pattern);
         }
 
         /**
@@ -90,7 +90,7 @@ public class VerbalExpression {
         /**
          * Append a regex from builder and wrap it with unnamed group (?: ... )
          *
-         * @param regex - VerbalExpression.Builder, that not changed
+         * @param regex - EasyExpression.Builder, that not changed
          * @return this builder
          * @since 1.2
          */
@@ -172,7 +172,7 @@ public class VerbalExpression {
          * Add a string to the expression that might appear once (or not)
          * Example:
          * The following matches all strings that contain http:// or https://
-         * VerbalExpression regex = regex()
+         * EasyExpression regex = regex()
          * .find("http")
          * .maybe("s")
          * .then("://")
@@ -191,8 +191,8 @@ public class VerbalExpression {
          * Add a regex to the expression that might appear once (or not)
          * Example:
          * The following matches all names that have a prefix or not.
-         * VerbalExpression.Builder namePrefix = regex().oneOf("Mr.", "Ms.");
-	 * VerbalExpression name = regex()
+         * EasyExpression.Builder namePrefix = regex().oneOf("Mr.", "Ms.");
+	 * EasyExpression name = regex()
 	 *	.maybe(namePrefix)
 	 *	.space()
 	 *	.zeroOrMore()
@@ -655,11 +655,11 @@ public class VerbalExpression {
     /**
      * Use builder {@link #regex()} (
      *
-     * to create new instance of VerbalExpression
+     * to create new instance of EasyExpression
      *
      * @param pattern - {@link java.util.regex.Pattern} that constructed by builder
      */
-    private VerbalExpression(final Pattern pattern) {
+    private EasyExpression(final Pattern pattern) {
         this.pattern = pattern;
     }
 
@@ -724,7 +724,7 @@ public class VerbalExpression {
      *
      * Example:
      * String text = "SampleHelloWorldString";
-     * VerbalExpression regex = regex().capt().oneOf("Hello", "World").endCapt().maybe("String").build();
+     * EasyExpression regex = regex().capt().oneOf("Hello", "World").endCapt().maybe("String").build();
      * list = regex.getTextGroups(text, 0) //result: "Hello", "WorldString"
      * list = regex.getTextGroups(text, 1) //result: "Hello", "World"
      *
@@ -747,10 +747,10 @@ public class VerbalExpression {
     }
 
     /**
-     * Creates new instance of VerbalExpression builder from cloned builder
+     * Creates new instance of EasyExpression builder from cloned builder
      *
      * @param pBuilder - instance to clone
-     * @return new VerbalExpression.Builder copied from passed
+     * @return new EasyExpression.Builder copied from passed
      * @since 1.1
      */
     public static Builder regex(final Builder pBuilder) {
@@ -766,9 +766,9 @@ public class VerbalExpression {
     }
 
     /**
-     * Creates new instance of VerbalExpression builder
+     * Creates new instance of EasyExpression builder
      *
-     * @return new VerbalExpression.Builder
+     * @return new EasyExpression.Builder
      * @since 1.1
      */
     public static Builder regex() {

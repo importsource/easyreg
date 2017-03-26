@@ -3,7 +3,7 @@
  */
 public class Demo {
     public static void main(String[] args) {
-        VerbalExpression testRegex = VerbalExpression.regex()
+        EasyExpression testRegex = EasyExpression.regex()
                 .startOfLine().then("http").maybe("s")
                 .then("://")
                 .maybe("www.").anythingBut(" ")
@@ -11,10 +11,12 @@ public class Demo {
                 .endOfLine()
                 .build();
 
+
+
         // Create an example URL
         String url = "https://www.google.com";
 
-        // Use VerbalExpression's testExact() method to test if the entire string matches the regex
+        // Use EasyExpression's testExact() method to test if the entire string matches the regex
         boolean is = testRegex.testExact(url); //True
         System.out.println(is);
 
